@@ -1,0 +1,80 @@
+%{
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#define MAX_SYMBOLS 100
+
+typedef struct {
+char name[100];
+int line_no;
+} symbol;
+symbol symboltable[MAX_SYMBOLS];
+int symbolcount = 0;
+void addsymbol(char *name, int line_no);
+void printsymboltable();
+extern int yylineno;
+%}
+%%
+[a-zA-Z_][a-zA-Z0-9_]* {addsymbol(yytext, yylineno);}
+\n {yylineno++;}
+[ \t\n] ;
+. ;
+%%
+void addsymbol(char *name, int line_no)
+{
+for (int i = 0; i < symbolcount; ++i)
+{
+if (strcmp(symboltable[i].name, name) == 0) {
+return;
+}
+
+}
+if (symbolcount < MAX_SYMBOLS)
+{
+strcpy(symboltable[symbolcount].name, name);
+symboltable[symbolcount].line_no = line_no;
+++symbolcount;
+}
+else
+{
+fprintf(stderr, "Symbol table overflow\n");
+}
+}
+void printsymboltable()
+{
+printf("Symbol Table:\n");
+printf("Name\t\tLine Number\n");
+printf("----\t\t-----------\n");
+for (int i = 0; i < symbolcount; ++i)
+{
+printf("%s\t\t%d\n", symboltable[i].name, symboltable[i].line_no);
+}
+}
+int main()
+{
+FILE *file;
+file = fopen("sample9.txt", "r");
+if (!file) {
+printf("Error: could not open file 'sample9.txt'\n");
+return 1;
+}
+
+yyin = file;
+yylineno=1;
+yylex();
+fclose(file);
+printsymboltable();
+return 0;
+}
+int yywrap()
+{
+return 1;
+}
+
+#gedit sample9.txt
+a
+b
+d
+c
+e
+f
