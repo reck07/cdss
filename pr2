@@ -1,0 +1,39 @@
+%{
+#include<stdio.h>
+int lines=0, words=0, c_letters=0, num=0, spl_chr=0, total=0, blank_spaces=0;
+%}
+%%
+\n { lines++; words++; }
+[\t] { words++; }
+[ ] { blank_spaces++; words++; }
+[a-zA-Z] { c_letters++; }
+[0-9] { num++; }
+. { spl_chr++; }
+%%
+int main()
+{
+FILE *file;
+file = fopen("sample2.txt", "r");
+if (!file){
+printf("Error: could not open file 'sample.txt'\n");
+return 1;
+}
+yyin = file;
+yylex();
+fclose(file);
+total = c_letters + num + spl_chr;
+printf("\nFile Contents...\n");
+printf("\n\t%d lines", lines);
+printf("\n\t%d words", words);
+printf("\n\t%d digits", num);
+printf("\n\t%d alphabetic characters", c_letters);
+
+printf("\n\t%d special characters", spl_chr);
+printf("\n\t%d blank spaces", blank_spaces);
+printf("\n\n\tTotal %d characters\n", total);
+return 0;
+}
+int yywrap()
+{
+return 1;
+}
