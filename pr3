@@ -1,0 +1,28 @@
+%{
+#include<stdio.h>
+int posint=0, negint=0,posfraction=0, negfraction=0;
+%}
+%%
+[-][0-9]+ {negint++;}
+[+]?[0-9]+ {posint++;}
+[+]?[0-9]*\.[0-9]+ {posfraction++;}
+[-][0-9]*\.[0-9]+ {negfraction++;}
+%%
+int main()
+{
+FILE *file;
+file = fopen("sample3.txt", "r");
+if (!file) {
+printf("Error: could not open file 'sample3.txt'\n");
+return 1;
+}
+yyin = file;
+yylex();
+fclose(file);
+printf("\nNumber of +ve integers=%d\n Number of –ve integers=%d\n Number of +ve
+fractions=%d\n Number of –ve fractions=%d\n", posint, negint,posfraction, negfraction);
+}
+int yywrap()
+{
+return 1;
+}
