@@ -1,0 +1,28 @@
+%{
+#include<stdio.h>
+int flag=0;
+%}
+%%
+and |
+or |
+but |
+like |
+then {flag=1;}
+. ;
+\n {return 1;}
+%%
+int main()
+{
+printf("Enter the sentence:\n");
+yylex();
+if (flag==0){
+printf("\nSimple sentence\n");
+}
+else {
+printf("\nCompound sentence\n");
+}
+}
+int yywrap()
+{
+return 1;
+}
