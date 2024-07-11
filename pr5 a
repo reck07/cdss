@@ -1,0 +1,40 @@
+%{
+#include <stdio.h>
+int printf_count = 0;
+int scanf_count = 0;
+%}
+printf printf
+scanf scanf
+%%
+{printf} {
+printf_count++;
+printf("std::cout");
+}
+{scanf} {
+scanf_count++;
+printf("std::cin");
+}
+.|\n {
+printf("%s", yytext);
+}
+%%
+int main()
+{
+FILE *file;
+file = fopen("sample5.txt", "r");
+if (!file) {
+printf("Error: could not open file 'sample5.txt'\n");
+return 1;
+}
+yyin = file;
+
+yylex();
+fclose(file);
+printf("\nNumber of printf statements: %d\n", printf_count);
+printf("Number of scanf statements: %d\n", scanf_count);
+return 0;
+}
+int yywrap()
+{
+return 1;
+}
