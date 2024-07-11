@@ -1,0 +1,25 @@
+%{
+#include <stdio.h>
+int com = 0;
+%}
+%%
+"//".* { com++; }
+%%
+int main()
+{
+FILE *file;
+file = fopen("sample4.txt", "r");
+if (!file) {
+printf("Error: could not open file 'sample4.txt'\n");
+return 1;
+}
+yyin = file;
+yylex();
+fclose(file);
+printf("Number of comment lines = %d\n", com);
+return 0;
+}
+int yywrap()
+{
+return 1;
+}
