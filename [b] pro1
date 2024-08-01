@@ -1,0 +1,52 @@
+gedit p2.1
+
+%{ #include "y.tab.h" %}
+%%
+[0-9]+ { yylval = atoi(yytext); return NUMBER; } [a-zA-Z]+ { return ID; }
+[\t]+;
+\n { return 0; }
+. { return yytext[0]; }
+%%
+int yywrap() { 
+return 1; }
+
+gedit p2.y
+%{
+#include <stdio.h>
+#include <stdlib.h>
+extern int yylex();
+void yyerror(const char *s); %}
+%token NUMBER ID
+%left '+' '-'
+%left '*' '/'
+%%
+exp:
+exp '+' exp
+| exp '-' exp
+| exp '*' exp
+| exp '/' exp
+| '-' exp %prec '-'
+| '(' exp ')'
+| NUMBER
+| ID
+;
+%%
+int main() {
+printf("Enter the expression:\n");
+if (yyparse() == 0) {
+printf("Expression is valid\n");
+}
+return 0;
+}
+void yyerror(const char *s) {
+fprintf(stderr, "\nExpression is invalid: %s\n", s);
+}
+for execution
+lex p2.1
+yacc -d p2.y
+gcc lex.yy.c y.tab.c
+./a.out
+
+a+b
+expression is valid
+
