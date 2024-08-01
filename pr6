@@ -27,7 +27,6 @@ printf("%s\t", op[k]);
 printf("\n Identifiers are:\n");
 for (k=0;k<i;k++)
 {
-
 printf("%s\t", id[k]);
 }
 }
@@ -36,3 +35,10 @@ int yywrap()
 {
 return 1;
 }
+
+output:
+enter the expression:
+1 + 3
+valid expression
+operators are= +
+identifies are= 1 3
