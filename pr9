@@ -58,7 +58,6 @@ if (!file) {
 printf("Error: could not open file 'sample9.txt'\n");
 return 1;
 }
-
 yyin = file;
 yylineno=1;
 yylex();
@@ -71,10 +70,19 @@ int yywrap()
 return 1;
 }
 
-#gedit sample9.txt
+//////#gedit sample9.txt
 a
 b
 d
 c
 e
 f
+
+output:
+symbole table:
+name              line number
+a                    1
+b                    2
+d                    3
+c                    4
+e                    5
