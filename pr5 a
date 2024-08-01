@@ -38,3 +38,43 @@ int yywrap()
 {
 return 1;
 }
+
+///////////#gedit sample5.txt
+
+#include <stdio.h>
+int main()
+{
+int a, b;
+printf("Enter two numbers: ");
+scanf("%d %d", &a, &b);
+printf("You entered: %d and %d\n", a, b);
+if (a > b) {
+printf("a is greater than b\n");
+} else {
+printf("b is greater than or equal to a\n");
+}
+return 0;
+}
+
+output:
+lex p5.l
+gcc lex.yy.c
+./a.out
+
+#include <stdio.h>
+int main()
+{
+int a, b;
+printf("Enter two numbers: ");
+scanf("%d %d", &a, &b);
+printf("You entered: %d and %d\n", a, b);
+if (a > b) {
+printf("a is greater than b\n");
+} else {
+printf("b is greater than or equal to a\n");
+}
+return 0;
+}
+number of printf statments:4
+number of scanf statments:1
+
