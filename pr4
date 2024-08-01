@@ -23,3 +23,24 @@ int yywrap()
 {
 return 1;
 }
+
+#gedit sample4.txt
+
+void main()
+{
+int a; // integer variable
+float b; // float variable
+// multiline
+}
+
+output:
+lex p4.l
+gcc lex.yy.c
+./a.out
+
+void main()
+{
+int a;
+float b;
+}
+number of comment lines =3
