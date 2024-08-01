@@ -26,3 +26,16 @@ int yywrap()
 {
 return 1;
 }
+
+#gedit sample3.txt
+
+83
+-37
+0.5
+-0.8 -1.0
+
+output:
+No. of +ve integers =1
+No. of -ve integers =1
+No. of +ve integers =1
+No. of -ve integers =1
