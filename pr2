@@ -27,7 +27,6 @@ printf("\n\t%d lines", lines);
 printf("\n\t%d words", words);
 printf("\n\t%d digits", num);
 printf("\n\t%d alphabetic characters", c_letters);
-
 printf("\n\t%d special characters", spl_chr);
 printf("\n\t%d blank spaces", blank_spaces);
 printf("\n\n\tTotal %d characters\n", total);
@@ -37,3 +36,16 @@ int yywrap()
 {
 return 1;
 }
+
+sample2.txt
+hi hello.
+123
+
+output:
+file contents.
+2 lines
+3 words
+3 digits
+7 alphabetic characters
+1 special characters
+2 blanks space
