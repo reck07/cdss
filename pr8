@@ -23,7 +23,11 @@ return 0;
 int yywrap() {
 return 1;
 }
-#gedit sample8.txt
+
+///////////#gedit sample8.txt
 a=1
 b=2
 c=3
+
+output:
+number of idendifiers are:3
